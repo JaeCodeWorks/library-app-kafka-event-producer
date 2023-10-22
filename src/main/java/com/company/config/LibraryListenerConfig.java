@@ -9,8 +9,11 @@ import java.util.Map;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "kafka-config")
-public class LibraryListenerConfiguration {
+public class LibraryListenerConfig {
 
     private String libraryTopicName;
-    private Map<Integer, String> libraryKafkaProducerProperties;
+    private int libraryTopicPartitions;
+    private short libraryTopicReplicationFactor;
+    private String libraryKafkaAdminBootstrapServers;
+    private Map<String, String> libraryKafkaProducerProperties;
 }

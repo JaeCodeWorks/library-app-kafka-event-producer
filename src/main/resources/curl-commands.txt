@@ -7,25 +7,38 @@ POST WITH-NULL-LIBRARY-EVENT-ID
 curl -i \
 -d '{"libraryEventId":null,"book":{"bookId":456,"bookName":"Head First Design Patterns","bookAuthor":"Eric Freeman"}}' \
 -H "Content-Type: application/json" \
--X POST http://localhost:8080/v1/libraryevent
+-X POST http://localhost:8080/library-api/v1/libraryevent
+
+POST WITH-BOOK-ID-NULL
+----------------------
+curl -i \
+-d '{"libraryEventId":null,"book":{"bookId":null,"bookName":"Head First Design Patterns","bookAuthor":"Eric Freeman"}}' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/library-api/v1/libraryevent
 
 PUT WITH ID
 ------------
-(Sends to same parition because of the key)
 curl -i \
--d '{"libraryEventId":123,"book":{"bookId":456,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
+-d '{"libraryEventId":1,"libraryEventType":"UPDATE", "book":{"bookId":457,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
 -H "Content-Type: application/json" \
--X PUT http://localhost:8080/v1/libraryevent
+-X PUT http://localhost:8080/library-api/v1/libraryevent
 
 (send to different partition because of the key)
 curl -i \
--d '{"libraryEventId":999,"book":{"bookId":456,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
+-d '{"libraryEventId":2,"libraryEventType":"UPDATE","book":{"bookId":457,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
 -H "Content-Type: application/json" \
--X PUT http://localhost:8080/v1/libraryevent
+-X PUT http://localhost:8080/library-api/v1/libraryevent
 
 PUT WITHOUT ID
 --------------
 curl -i \
--d '{"libraryEventId":null,"book":{"bookId":456,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
+-d '{"libraryEventId":null,"libraryEventType":"UPDATE", "book":{"bookId":457,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
 -H "Content-Type: application/json" \
--X PUT http://localhost:8080/v1/libraryevent
+-X PUT http://localhost:8080/library-api/v1/libraryevent
+
+PUT WITH Type "NEW"
+-------------------
+curl -i \
+-d '{"libraryEventId":null,"libraryEventType":"NEW", "book":{"bookId":457,"bookName":"Effective Java 3rd Edition","bookAuthor":"Joshua Bloch"}}' \
+-H "Content-Type: application/json" \
+-X PUT http://localhost:8080/library-api/v1/libraryevent

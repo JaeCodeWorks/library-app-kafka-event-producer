@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  title: Library Application Kafka API
+  description: Specifies the open api contract for library-app-kafka-events-producer
+  version: v1
+servers:
+- url: /library-api
+
+paths:
+  /v1/libraryevent:
+    put:
+      tags:
+      - library-events-controller
+      operationId: updateLibrary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryEvent'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+      - library-events-controller
+      operationId: addBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LibraryEvent'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LibraryEvent'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    Book:
+      required:
+      - bookAuthor
+      - bookId
+      - bookName
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int32
+        bookName:
+          type: string
+        bookAuthor:
+          type: string
+    LibraryEvent:
+      required:
+      - book
+      type: object
+      properties:
+        libraryEventId:
+          type: integer
+          format: int32
+        libraryEventType:
+          type: string
+          enum:
+          - NEW
+          - UPDATE
+        book:
+          $ref: '#/components/schemas/Book'

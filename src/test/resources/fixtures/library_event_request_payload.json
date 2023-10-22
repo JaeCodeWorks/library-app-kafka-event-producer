@@ -1,0 +1,10 @@
+{
+  "libraryEventId":"${libraryEventId}",
+  "libraryEventType":"${libraryEventType}",
+  "book":
+    {
+      "bookId":"${bookId}",
+      "bookName":"${bookName}",
+      "bookAuthor":"${bookAuthor}"
+    }
+}

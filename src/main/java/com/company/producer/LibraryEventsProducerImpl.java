@@ -50,8 +50,7 @@ public class LibraryEventsProducerImpl implements LibraryEventsProducer {
 
     }
 
-    @VisibleForTesting
-    protected ProducerRecord<Integer, String> buildProducerRecordWithHeaders(Integer key, String value) {
+    private ProducerRecord<Integer, String> buildProducerRecordWithHeaders(Integer key, String value) {
 
         List<Header> recordHeaders = List.of(new RecordHeader(
                 "sourceSystemId",

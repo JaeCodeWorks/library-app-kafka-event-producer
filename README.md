@@ -75,6 +75,7 @@ https://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html
 ## Improvements
 - Use Schema Registry for event validation(avro schema)
 - Kafka-UI to have visibility of the events in the topic
+- Track failed records (onFailure)
 
 ## Authors
 Shreejung Limbu
